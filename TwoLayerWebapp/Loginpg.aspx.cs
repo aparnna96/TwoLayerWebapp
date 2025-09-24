@@ -14,7 +14,8 @@ namespace TwoLayerWebapp
         Connectionclass objclass = new Connectionclass();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Ensure the table exists before any queries
+            objclass.CreateTab1twolayrTable();
         }
 
         protected void Button1_Click(object sender, EventArgs e)

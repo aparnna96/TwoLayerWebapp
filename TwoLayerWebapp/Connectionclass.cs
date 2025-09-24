@@ -13,7 +13,7 @@ namespace TwoLayerWebapp
         SqlCommand cmd;
         public Connectionclass()
         {
-            con = new SqlConnection(@"server=DESKTOP-SFE2A0I\SQLEXPRESS;database=DbTwoLayer;Integrated security=true");
+            con = new SqlConnection(@"Server=localhost\MSSQLSERVER01;Database=master;Trusted_Connection=True;");
         }
         public int Fn_Nonquery(string sqlquery)//insert/delete/update
         {
@@ -74,6 +74,20 @@ namespace TwoLayerWebapp
             DataTable dt = new DataTable();
             da.Fill(dt);
             return dt;
+        }
+        public void CreateTab1twolayrTable()
+        {
+            string createTableSql = @"IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Tab1twolayr' AND xtype='U')
+            CREATE TABLE Tab1twolayr (
+                Id INT IDENTITY(1,1) PRIMARY KEY,
+                name NVARCHAR(100),
+                age INT,
+                address NVARCHAR(200),
+                photo NVARCHAR(200),
+                Username NVARCHAR(100),
+                Password NVARCHAR(100)
+            )";
+            Fn_Nonquery(createTableSql);
         }
     }
 }
